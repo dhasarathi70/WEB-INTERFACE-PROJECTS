@@ -1,0 +1,376 @@
+name: Deploy All Web Interface Projects
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          
+
+      # --------------------------------------------------
+      # Create deployment directories
+      # --------------------------------------------------
+
+      - name: Create deployment directories
+        run: |
+          mkdir -p deploy
+          mkdir -p deploy/attendance-management
+          mkdir -p deploy/calculator-app
+          mkdir -p deploy/counter-app
+          mkdir -p deploy/form-validation
+          mkdir -p deploy/hobby-gallery
+          mkdir -p deploy/portfolio
+          mkdir -p deploy/report-card
+          mkdir -p deploy/student-profile-card
+          mkdir -p deploy/student-academic-status
+          mkdir -p deploy/taskflow-todo
+
+      # --------------------------------------------------
+      # Build React Projects
+      # --------------------------------------------------
+
+      - name: Build Attendance Management
+        run: |
+          npm install --prefix "attendance-management"
+          npm run build --prefix "attendance-management" -- --base=/WEB-INTERFACE-PROJECTS/attendance-management/
+          cp -r attendance-management/dist/. deploy/attendance-management/
+
+      - name: Build Calculator App
+        run: |
+          npm install --prefix "Calculator_App/my-react-app"
+          npm run build --prefix "Calculator_App/my-react-app" -- --base=/WEB-INTERFACE-PROJECTS/calculator-app/
+          cp -r Calculator_App/my-react-app/dist/. deploy/calculator-app/
+
+      - name: Build Form Validation
+        run: |
+          npm install --prefix "Form_Validation"
+          npm run build --prefix "Form_Validation" -- --base=/WEB-INTERFACE-PROJECTS/form-validation/
+          cp -r Form_Validation/dist/. deploy/form-validation/
+
+      - name: Build Hobby Gallery
+        run: |
+          npm install --prefix "hobby-gallery"
+          npm run build --prefix "hobby-gallery" -- --base=/WEB-INTERFACE-PROJECTS/hobby-gallery/
+          cp -r hobby-gallery/dist/. deploy/hobby-gallery/
+
+      - name: Build Portfolio
+        run: |
+          npm install --prefix "portfolio"
+          npm run build --prefix "portfolio" -- --base=/WEB-INTERFACE-PROJECTS/portfolio/
+          cp -r portfolio/dist/. deploy/portfolio/
+
+      - name: Build Report Card
+        run: |
+          npm install --prefix "Report-Card/my-react-app"
+          npm run build --prefix "Report-Card/my-react-app" -- --base=/WEB-INTERFACE-PROJECTS/report-card/
+          cp -r Report-Card/my-react-app/dist/. deploy/report-card/
+
+      - name: Build Student Academic Status
+        run: |
+          npm install --prefix "student-academic-status"
+          npm run build --prefix "student-academic-status" -- --base=/WEB-INTERFACE-PROJECTS/student-academic-status/
+          cp -r student-academic-status/dist/. deploy/student-academic-status/
+
+      - name: Build TaskFlow Todo
+        run: |
+          npm install --prefix "To-do app/my-react-app/taskflow-todo"
+          npm run build --prefix "To-do app/my-react-app/taskflow-todo" -- --base=/WEB-INTERFACE-PROJECTS/taskflow-todo/
+          cp -r "To-do app/my-react-app/taskflow-todo/dist/." deploy/taskflow-todo/
+
+      # --------------------------------------------------
+      # Copy Static HTML Projects
+      # --------------------------------------------------
+
+      - name: Copy Counter App
+        run: |
+          cp "Counter App/counter.html" deploy/counter-app/index.html
+
+      - name: Copy Student Profile Card
+        run: |
+          cp "Student Profile Card/profile.html" deploy/student-profile-card/index.html
+
+      # --------------------------------------------------
+      # Create Main Project Showcase
+      # --------------------------------------------------
+
+      - name: Create Project Showcase
+        run: |
+          cat > deploy/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Web Interface Projects | Dhasarathi A</title>
+
+            <style>
+              * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+              }
+
+              body {
+                font-family: Arial, Helvetica, sans-serif;
+                min-height: 100vh;
+                background:
+                  radial-gradient(circle at top, #243b55 0%, #141e30 45%, #080b10 100%);
+                color: #ffffff;
+                padding: 60px 20px;
+              }
+
+              .container {
+                max-width: 1200px;
+                margin: auto;
+              }
+
+              .hero {
+                text-align: center;
+                margin-bottom: 55px;
+              }
+
+              .hero h1 {
+                font-size: clamp(2.4rem, 6vw, 5rem);
+                letter-spacing: 2px;
+                margin-bottom: 15px;
+              }
+
+              .hero p {
+                color: #c8d1dc;
+                font-size: 1.1rem;
+                line-height: 1.7;
+              }
+
+              .hero .subtitle {
+                margin-top: 8px;
+                color: #8fa9c4;
+              }
+
+              .projects {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 22px;
+              }
+
+              .card {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 210px;
+                padding: 28px;
+                border: 1px solid rgba(255,255,255,0.12);
+                border-radius: 20px;
+                background: rgba(255,255,255,0.07);
+                backdrop-filter: blur(15px);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+                transition: transform .25s ease, border-color .25s ease;
+              }
+
+              .card:hover {
+                transform: translateY(-7px);
+                border-color: rgba(255,255,255,0.35);
+              }
+
+              .number {
+                color: #7db7ff;
+                font-size: .85rem;
+                font-weight: bold;
+                letter-spacing: 2px;
+                margin-bottom: 18px;
+              }
+
+              .card h2 {
+                font-size: 1.35rem;
+                margin-bottom: 12px;
+              }
+
+              .card p {
+                color: #b9c4d0;
+                line-height: 1.6;
+                font-size: .95rem;
+                margin-bottom: 25px;
+              }
+
+              .button {
+                display: inline-block;
+                width: fit-content;
+                padding: 10px 18px;
+                border-radius: 10px;
+                text-decoration: none;
+                color: #ffffff;
+                background: rgba(255,255,255,0.12);
+                border: 1px solid rgba(255,255,255,0.15);
+                transition: background .2s ease;
+              }
+
+              .button:hover {
+                background: rgba(255,255,255,0.22);
+              }
+
+              footer {
+                text-align: center;
+                margin-top: 60px;
+                color: #8291a1;
+                font-size: .9rem;
+              }
+            </style>
+          </head>
+
+          <body>
+            <div class="container">
+
+              <header class="hero">
+                <h1>Web Interface Projects</h1>
+                <p>A collection of React and web development projects</p>
+                <p class="subtitle">Dhasarathi A. · B.E. CSE (Cyber Security)</p>
+              </header>
+
+              <main class="projects">
+
+                <article class="card">
+                  <div>
+                    <div class="number">01</div>
+                    <h2>Attendance Management</h2>
+                    <p>Student attendance management dashboard built with React.</p>
+                  </div>
+                  <a class="button" href="./attendance-management/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">02</div>
+                    <h2>Calculator App</h2>
+                    <p>A responsive calculator interface created with React.</p>
+                  </div>
+                  <a class="button" href="./calculator-app/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">03</div>
+                    <h2>Counter App</h2>
+                    <p>A simple interactive counter implemented using web technologies.</p>
+                  </div>
+                  <a class="button" href="./counter-app/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">04</div>
+                    <h2>Form Validation</h2>
+                    <p>React form validation and registration interface.</p>
+                  </div>
+                  <a class="button" href="./form-validation/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">05</div>
+                    <h2>Hobby Gallery</h2>
+                    <p>An interactive gallery presenting different hobbies.</p>
+                  </div>
+                  <a class="button" href="./hobby-gallery/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">06</div>
+                    <h2>Personal Portfolio</h2>
+                    <p>A cinematic personal portfolio built with React.</p>
+                  </div>
+                  <a class="button" href="./portfolio/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">07</div>
+                    <h2>Report Card</h2>
+                    <p>A student report card interface with semester navigation.</p>
+                  </div>
+                  <a class="button" href="./report-card/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">08</div>
+                    <h2>Student Profile Card</h2>
+                    <p>A standalone student profile card web project.</p>
+                  </div>
+                  <a class="button" href="./student-profile-card/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">09</div>
+                    <h2>Student Academic Status</h2>
+                    <p>A React-based academic status and performance portal.</p>
+                  </div>
+                  <a class="button" href="./student-academic-status/">Open Project →</a>
+                </article>
+
+                <article class="card">
+                  <div>
+                    <div class="number">10</div>
+                    <h2>TaskFlow Todo</h2>
+                    <p>A React todo application for managing daily tasks.</p>
+                  </div>
+                  <a class="button" href="./taskflow-todo/">Open Project →</a>
+                </article>
+
+              </main>
+
+              <footer>
+                © 2026 Dhasarathi A. · Web Interface Projects
+              </footer>
+
+            </div>
+          </body>
+          </html>
+          EOF
+
+      # --------------------------------------------------
+      # Configure GitHub Pages
+      # --------------------------------------------------
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./deploy
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
