@@ -1,0 +1,309 @@
+/* =========================================================
+   CINEMATIC PRELOADER
+   ========================================================= */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 34px 5vw;
+
+  background: #070708;
+  color: #f5f5f5;
+
+  overflow: hidden;
+
+  clip-path: inset(0 0 0 0);
+}
+
+/* =========================================================
+   TECHNICAL GRID
+   ========================================================= */
+
+.preloader-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 90px 90px;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CINEMATIC VIGNETTE
+   ========================================================= */
+
+.preloader::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 20%,
+      rgba(0, 0, 0, 0.45) 100%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   TOP
+   ========================================================= */
+
+.preloader-top {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+  letter-spacing: 0.16em;
+
+  color: rgba(255, 255, 255, 0.42);
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   CENTER
+   ========================================================= */
+
+.preloader-center {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  z-index: 2;
+
+  width: 90%;
+
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+}
+
+/* Small number */
+
+.loader-index {
+  margin-bottom: 25px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+  letter-spacing: 0.2em;
+
+  color: rgba(255, 255, 255, 0.32);
+}
+
+/* =========================================================
+   MAIN NAME
+   ========================================================= */
+
+.loader-name {
+  margin: 0;
+
+  font-family:
+    "Manrope",
+    "Inter",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size: clamp(4rem, 10vw, 10rem);
+
+  line-height: 0.85;
+
+  letter-spacing: -0.07em;
+
+  font-weight: 700;
+
+  color: #f3f3f3;
+
+  white-space: nowrap;
+}
+
+.loader-name span {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.loader-title {
+  margin-top: 30px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 10px;
+
+  letter-spacing: 0.28em;
+
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* =========================================================
+   BOTTOM
+   ========================================================= */
+
+.preloader-bottom {
+  position: relative;
+  z-index: 2;
+
+  width: min(620px, 100%);
+
+  margin: 0 auto;
+}
+
+/* =========================================================
+   META
+   ========================================================= */
+
+.loader-meta {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 0.14em;
+
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.loader-meta strong {
+  color: #fff;
+
+  font-weight: 400;
+}
+
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
+
+.loader-track {
+  position: relative;
+
+  width: 100%;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  overflow: hidden;
+}
+
+.loader-progress {
+  width: 0;
+  height: 100%;
+
+  background: #f4f4f4;
+
+  transform-origin: left center;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.loader-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 14px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 8px;
+
+  letter-spacing: 0.13em;
+
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .preloader {
+    padding: 25px 6vw;
+  }
+
+  .preloader-top {
+    font-size: 8px;
+  }
+
+  .loader-name {
+    font-size: clamp(3rem, 14vw, 6rem);
+
+    white-space: normal;
+  }
+
+  .loader-title {
+    margin-top: 22px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.18em;
+  }
+
+  .loader-footer {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 450px) {
+  .loader-name {
+    font-size: 3.2rem;
+  }
+
+  .loader-index {
+    margin-bottom: 18px;
+  }
+
+  .loader-title {
+    line-height: 1.7;
+  }
+
+  .loader-footer span:first-child {
+    display: none;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader {
+    display: none;
+  }
+}

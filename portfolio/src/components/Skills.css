@@ -1,0 +1,22 @@
+.skills-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,60px);}
+.skill-cat{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 4px;border-top:1px solid var(--border-subtle);cursor:pointer;
+}
+.skill-cat:last-child{border-bottom:1px solid var(--border-subtle);}
+.skill-cat-left{display:flex;align-items:baseline;gap:18px;}
+.skill-cat-num{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);}
+.skill-cat-name{font-family:var(--font-display);font-weight:600;font-size:clamp(1.05rem,2vw,1.4rem);}
+.skill-cat.active .skill-cat-name{color:var(--accent);}
+.skill-cat-arrow{font-family:var(--font-mono);color:var(--text-muted);transition:transform .3s var(--ease);}
+.skill-cat.active .skill-cat-arrow{transform:rotate(90deg);color:var(--accent);}
+.skill-panel{
+  border:1px solid var(--border-subtle);padding:clamp(24px,4vw,40px);min-height:280px;
+  background:var(--bg-secondary);
+}
+.skill-panel-head{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;color:var(--text-muted);margin-bottom:26px;display:flex;justify-content:space-between;}
+.skill-panel-title{font-family:var(--font-display);font-weight:700;font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:22px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px;}
+.skill-tags span{font-family:var(--font-mono);font-size:.72rem;color:var(--text-secondary);border:1px solid var(--border-subtle-2);padding:8px 14px;}
+.skill-panel-note{color:var(--text-muted);font-size:.85rem;line-height:1.7;}
+@media (max-width:860px){.skills-layout{grid-template-columns:1fr;}}

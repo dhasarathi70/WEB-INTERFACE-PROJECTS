@@ -1,0 +1,820 @@
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Dots&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================
+   SAMURAI NIGHT BACKGROUND
+========================= */
+
+.samurai-scene {
+  width: 100%;
+  min-height: 100vh;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(35, 63, 100, 0.5),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #07111f 0%,
+      #0a1424 50%,
+      #05080e 100%
+    );
+
+  font-family: "Shippori Mincho", serif;
+}
+
+/* Stars */
+
+.stars {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.5;
+
+  background-image:
+    radial-gradient(circle, #ffffff 1px, transparent 1px),
+    radial-gradient(circle, #a9c7e8 1px, transparent 1px);
+
+  background-size:
+    90px 90px,
+    150px 150px;
+
+  background-position:
+    15px 20px,
+    80px 60px;
+
+  animation: starGlow 4s ease-in-out infinite;
+}
+
+@keyframes starGlow {
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* =========================
+   FULL MOON
+========================= */
+
+.moon {
+  position: absolute;
+
+  top: 7%;
+  right: 12%;
+
+  width: 145px;
+  height: 145px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #ffffff,
+      #dfe9ef 50%,
+      #aabcc9
+    );
+
+  box-shadow:
+    0 0 40px rgba(220, 235, 255, 0.8),
+    0 0 110px rgba(120, 170, 220, 0.3);
+
+  animation: moonFloat 6s ease-in-out infinite;
+
+  z-index: 2;
+}
+
+@keyframes moonFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* =========================
+   CLOUDS
+========================= */
+
+.cloud {
+  position: absolute;
+
+  width: 350px;
+  height: 100px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(60, 76, 100, 0.4),
+      transparent 70%
+    );
+
+  filter: blur(10px);
+
+  z-index: 3;
+}
+
+.cloud-one {
+  top: 22%;
+  left: -50px;
+
+  animation: cloudMove 18s linear infinite;
+}
+
+.cloud-two {
+  top: 38%;
+  right: -100px;
+
+  animation: cloudMoveReverse 22s linear infinite;
+}
+
+@keyframes cloudMove {
+  from {
+    transform: translateX(-100px);
+  }
+
+  to {
+    transform: translateX(300px);
+  }
+}
+
+@keyframes cloudMoveReverse {
+  from {
+    transform: translateX(100px);
+  }
+
+  to {
+    transform: translateX(-300px);
+  }
+}
+
+/* =========================
+   JAPANESE WAVES
+========================= */
+
+.wave-pattern {
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 200%;
+  height: 180px;
+
+  opacity: 0.25;
+
+  background:
+    repeating-radial-gradient(
+      circle at 50% 100%,
+      transparent 0 22px,
+      #517596 23px 25px,
+      transparent 26px 45px
+    );
+
+  animation: waveMove 12s linear infinite;
+}
+
+@keyframes waveMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-200px);
+  }
+}
+
+/* =========================
+   CALCULATOR CARD
+========================= */
+
+.calculator {
+  width: 405px;
+  max-width: calc(100% - 30px);
+
+  padding: 26px;
+
+  position: relative;
+  z-index: 10;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30, 32, 35, 0.98),
+      rgba(12, 14, 18, 0.98)
+    );
+
+  border:
+    1px solid rgba(190, 155, 90, 0.35);
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 35px 80px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 35px rgba(120, 20, 25, 0.12);
+
+  animation: cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Red brush accent */
+
+.calculator::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 12%;
+
+  width: 76%;
+  height: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #5f0f18,
+      #9d1c28,
+      #5f0f18,
+      transparent
+    );
+
+  border-radius: 50%;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.calculator-title {
+  text-align: center;
+
+  margin-bottom: 16px;
+
+  color: #c79a42;
+
+  font-size: 15px;
+  letter-spacing: 3px;
+
+  text-shadow:
+    0 0 10px rgba(200, 155, 65, 0.3);
+}
+
+/* =========================
+   DISPLAY
+========================= */
+
+.calculator__screen {
+  min-height: 135px;
+
+  margin-bottom: 22px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0b1118,
+      #14181d
+    );
+
+  border-left: 4px solid #7d1821;
+
+  border-right: 1px solid rgba(200, 155, 65, 0.25);
+
+  border-top: 1px solid rgba(200, 155, 65, 0.2);
+
+  border-bottom: 1px solid rgba(200, 155, 65, 0.2);
+
+  border-radius: 8px;
+
+  overflow: hidden;
+}
+
+/* Red sun inside screen */
+
+.calculator__screen::before {
+  content: "";
+
+  position: absolute;
+
+  width: 130px;
+  height: 130px;
+
+  right: -70px;
+  top: -70px;
+
+  border-radius: 50%;
+
+  background: rgba(125, 24, 33, 0.1);
+
+  box-shadow:
+    0 0 50px rgba(125, 24, 33, 0.2);
+}
+
+.calculator__expression {
+  width: 100%;
+
+  min-height: 30px;
+
+  text-align: right;
+
+  color: #aeb9c2;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calculator__result {
+  width: 100%;
+
+  text-align: right;
+
+  color: #f2f4f5;
+
+  font-family: "Zen Dots", sans-serif;
+
+  font-size: 42px;
+
+  overflow-x: auto;
+  white-space: nowrap;
+
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.calculator__result--error {
+  color: #e94f5d;
+
+  animation: errorShake 0.4s ease;
+}
+
+@keyframes errorShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-8px);
+  }
+
+  75% {
+    transform: translateX(8px);
+  }
+}
+
+/* =========================
+   GRID
+========================= */
+
+.calculator__grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 12px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn {
+  height: 62px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-family: "Shippori Mincho", serif;
+
+  font-size: 22px;
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: scale(0.94);
+}
+
+/* =========================
+   NUMBER BUTTONS
+========================= */
+
+.btn--number {
+  color: #f1f3f4;
+
+  background:
+    linear-gradient(
+      145deg,
+      #30353a,
+      #1d2227
+    );
+
+  border:
+    1px solid #48515a;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 5px 10px rgba(0, 0, 0, 0.35);
+}
+
+.btn--number:hover {
+  background:
+    linear-gradient(
+      145deg,
+      #42494f,
+      #282e34
+    );
+
+  box-shadow:
+    0 0 14px rgba(180, 195, 205, 0.12);
+}
+
+/* =========================
+   UTILITY BUTTONS
+========================= */
+
+.btn--utility {
+  color: #d7dadd;
+
+  background:
+    linear-gradient(
+      145deg,
+      #272b30,
+      #171a1e
+    );
+
+  border:
+    1px solid #474c52;
+}
+
+.btn--utility:hover {
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      145deg,
+      #353a40,
+      #1e2227
+    );
+}
+
+/* =========================
+   OPERATOR BUTTONS
+========================= */
+
+.btn--operator {
+  color: #ffe9e9;
+
+  background:
+    linear-gradient(
+      145deg,
+      #8f1f2b,
+      #5d1019
+    );
+
+  border:
+    1px solid #b73a46;
+
+  box-shadow:
+    0 6px 15px rgba(100, 10, 20, 0.35);
+}
+
+.btn--operator:hover {
+  background:
+    linear-gradient(
+      145deg,
+      #b72a37,
+      #73131e
+    );
+
+  box-shadow:
+    0 8px 20px rgba(180, 30, 40, 0.35);
+}
+
+/* =========================
+   ZERO
+========================= */
+
+.btn--zero {
+  grid-column: span 2;
+}
+
+/* =========================
+   GOLDEN SAMURAI BUTTON
+========================= */
+
+.btn--equals {
+  color: #18130a;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f1c768,
+      #b68128
+    );
+
+  border:
+    1px solid #ffe09a;
+
+  box-shadow:
+    0 6px 20px rgba(200, 150, 40, 0.35);
+
+  font-size: 24px;
+}
+
+.btn--equals:hover {
+  background:
+    linear-gradient(
+      145deg,
+      #ffe092,
+      #c89332
+    );
+
+  box-shadow:
+    0 10px 28px rgba(240, 190, 70, 0.5);
+}
+
+/* =========================
+   RESULT EVENT
+========================= */
+
+.answer-event .calculator {
+  animation:
+    screenShake 0.35s ease,
+    cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes screenShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.result-animation {
+  animation: resultReveal 0.8s ease;
+}
+
+@keyframes resultReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    color: #c79a42;
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.18);
+    color: #ffd977;
+  }
+
+  100% {
+    transform: scale(1);
+    color: #f2f4f5;
+  }
+}
+
+/* =========================
+   SWORD SLASH
+========================= */
+
+.sword-slash {
+  position: fixed;
+
+  width: 160%;
+  height: 7px;
+
+  top: 50%;
+  left: -30%;
+
+  z-index: 50;
+
+  transform: rotate(-18deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.9),
+      #d8b45a,
+      #ffffff,
+      transparent
+    );
+
+  box-shadow:
+    0 0 12px #ffffff,
+    0 0 30px #c89b3c;
+
+  animation: swordSlash 0.45s ease-out forwards;
+
+  pointer-events: none;
+}
+
+@keyframes swordSlash {
+  from {
+    transform:
+      translateX(-100%)
+      rotate(-18deg);
+
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  to {
+    transform:
+      translateX(100%)
+      rotate(-18deg);
+
+    opacity: 0;
+  }
+}
+
+/* =========================
+   GOLDEN SPARKS
+========================= */
+
+.sparks {
+  position: absolute;
+  inset: 0;
+
+  z-index: 40;
+
+  pointer-events: none;
+}
+
+.sparks span {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  color: #ffd76b;
+
+  font-size: 30px;
+
+  text-shadow:
+    0 0 10px #ffd76b;
+
+  animation: sparkBurst 1.5s ease-out forwards;
+}
+
+.sparks span:nth-child(1) {
+  --x: -220px;
+  --y: -160px;
+}
+
+.sparks span:nth-child(2) {
+  --x: 220px;
+  --y: -130px;
+}
+
+.sparks span:nth-child(3) {
+  --x: -240px;
+  --y: 100px;
+}
+
+.sparks span:nth-child(4) {
+  --x: 230px;
+  --y: 120px;
+}
+
+.sparks span:nth-child(5) {
+  --x: -70px;
+  --y: -250px;
+}
+
+.sparks span:nth-child(6) {
+  --x: 70px;
+  --y: 240px;
+}
+
+.sparks span:nth-child(7) {
+  --x: 260px;
+  --y: 20px;
+}
+
+@keyframes sparkBurst {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      rotate(360deg)
+      scale(1.3);
+
+    opacity: 0;
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .calculator {
+    width: 360px;
+    padding: 20px;
+  }
+
+  .moon {
+    width: 90px;
+    height: 90px;
+
+    top: 4%;
+    right: 7%;
+  }
+
+  .calculator__result {
+    font-size: 34px;
+  }
+
+  .btn {
+    height: 58px;
+    font-size: 20px;
+  }
+
+  .calculator__grid {
+    gap: 10px;
+  }
+}

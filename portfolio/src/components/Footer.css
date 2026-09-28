@@ -1,0 +1,5 @@
+footer{padding:50px 0;}
+.footer-inner{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;}
+.footer-name{font-family:var(--font-display);font-weight:700;font-size:1rem;}
+.footer-role{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;color:var(--text-muted);margin-top:6px;}
+.footer-coord{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;color:var(--text-muted);}
