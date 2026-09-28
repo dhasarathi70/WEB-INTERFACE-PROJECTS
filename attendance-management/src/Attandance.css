@@ -1,0 +1,1199 @@
+/* ==========================================
+   MOONLIT ACADEMY - ATTENDANCE DASHBOARD
+   Original Anime Cinematic CSS
+========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --night: #080d1d;
+  --night-2: #111936;
+  --night-3: #1c2750;
+
+  --moon: #dce8ff;
+  --mist: #aebbd7;
+  --glass: rgba(20, 30, 60, 0.68);
+
+  --gold: #f0c46a;
+  --present: #71d5b2;
+  --absent: #e27687;
+  --pending: #e6b85c;
+
+  --white: #f7f9ff;
+}
+
+body {
+  margin: 0;
+  background: var(--night);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ==========================================
+   CINEMATIC NIGHT BACKGROUND
+========================================== */
+
+.attendance-page {
+  min-height: 100vh;
+  padding: 40px 25px;
+
+  color: var(--white);
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 85% 12%,
+      rgba(220, 232, 255, 0.13) 0,
+      rgba(220, 232, 255, 0.04) 12%,
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 15% 75%,
+      rgba(86, 112, 181, 0.12),
+      transparent 28%
+    ),
+    linear-gradient(
+      145deg,
+      #060a15,
+      #0e1730 52%,
+      #101a36
+    );
+}
+
+/* Film grain */
+
+.attendance-page::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.045;
+
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255, 255, 255, 0.6) 4px
+    );
+}
+
+/* Cinematic moon */
+
+.attendance-page::after {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  top: -90px;
+  right: 7%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 40% 35%,
+      #ffffff,
+      #d9e5ff 40%,
+      rgba(198, 215, 255, 0.35) 60%,
+      transparent 72%
+    );
+
+  opacity: 0.75;
+
+  filter: blur(1px);
+
+  box-shadow:
+    0 0 100px rgba(155, 183, 255, 0.22);
+
+  pointer-events: none;
+
+  animation: moonGlow 7s ease-in-out infinite;
+}
+
+@keyframes moonGlow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* ==========================================
+   MAIN DASHBOARD
+========================================== */
+
+.attendance-dashboard {
+  max-width: 1280px;
+  margin: auto;
+
+  position: relative;
+  z-index: 2;
+
+  animation: cinematicEnter 0.9s ease;
+}
+
+@keyframes cinematicEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================
+   GLASS HEADER
+========================================== */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 25px 30px;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(28, 42, 83, 0.85),
+      rgba(10, 17, 39, 0.78)
+    );
+
+  backdrop-filter: blur(18px);
+
+  border:
+    1px solid rgba(220, 232, 255, 0.14);
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-icon {
+  width: 60px;
+  height: 60px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 18px;
+
+  color: var(--moon);
+  font-size: 28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(174, 195, 255, 0.24),
+      rgba(84, 107, 185, 0.1)
+    );
+
+  border:
+    1px solid rgba(220, 232, 255, 0.3);
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.16),
+    0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.header-left h1 {
+  font-size: 27px;
+  letter-spacing: -0.5px;
+
+  color: var(--white);
+}
+
+.header-left p {
+  margin-top: 6px;
+
+  font-size: 12px;
+  letter-spacing: 2px;
+
+  color: var(--mist);
+  text-transform: uppercase;
+}
+
+.class-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 8px;
+
+  font-size: 12px;
+  color: var(--mist);
+}
+
+/* ==========================================
+   CLASS INFO - FILM TITLE CARDS
+========================================== */
+
+.class-banner {
+  display: grid;
+
+  grid-template-columns:
+    1.4fr 1fr 1fr;
+
+  gap: 15px;
+
+  margin: 22px 0;
+}
+
+.class-banner > div {
+  padding: 22px;
+
+  position: relative;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  background:
+    rgba(17, 25, 54, 0.72);
+
+  border:
+    1px solid rgba(180, 199, 255, 0.1);
+
+  transition:
+    transform 0.3s,
+    border-color 0.3s;
+}
+
+.class-banner > div:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(240, 196, 106, 0.4);
+}
+
+.class-banner > div::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      transparent
+    );
+
+  opacity: 0.7;
+}
+
+.label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--gold);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+.class-banner h2 {
+  color: var(--white);
+  font-size: 17px;
+}
+
+/* ==========================================
+   SUMMARY CARDS
+========================================== */
+
+.attendance-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 16px;
+
+  margin-bottom: 22px;
+}
+
+.summary-card {
+  min-height: 135px;
+
+  padding: 20px;
+
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(36, 49, 91, 0.75),
+      rgba(14, 20, 45, 0.85)
+    );
+
+  border:
+    1px solid rgba(190, 207, 255, 0.1);
+
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+
+.summary-card:hover {
+  transform: translateY(-6px);
+}
+
+.summary-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.summary-card p {
+  color: var(--mist);
+  font-size: 12px;
+}
+
+.summary-card h2 {
+  margin-top: 5px;
+
+  color: var(--white);
+
+  font-size: 30px;
+}
+
+/* Total */
+
+.total-card .summary-icon {
+  color: var(--moon);
+
+  background:
+    rgba(170, 194, 255, 0.13);
+}
+
+/* Present */
+
+.present-card .summary-icon {
+  color: var(--present);
+
+  background:
+    rgba(113, 213, 178, 0.1);
+}
+
+.present-card:hover {
+  box-shadow:
+    0 15px 35px rgba(61, 174, 136, 0.13);
+}
+
+/* Absent */
+
+.absent-card .summary-icon {
+  color: var(--absent);
+
+  background:
+    rgba(226, 118, 135, 0.1);
+}
+
+/* Pending */
+
+.pending-card .summary-icon {
+  color: var(--pending);
+
+  background:
+    rgba(230, 184, 92, 0.1);
+}
+
+/* ==========================================
+   SEARCH AND CONTROLS
+========================================== */
+
+.controls-section {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 22px;
+
+  padding: 12px;
+
+  border-radius: 16px;
+
+  background:
+    rgba(12, 19, 42, 0.7);
+
+  border:
+    1px solid rgba(220, 232, 255, 0.09);
+}
+
+.search-box {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  height: 48px;
+
+  padding: 0 16px;
+
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border:
+    1px solid rgba(220, 232, 255, 0.09);
+
+  transition: border 0.2s;
+}
+
+.search-box:focus-within {
+  border-color:
+    rgba(240, 196, 106, 0.55);
+}
+
+.search-box span {
+  color: var(--gold);
+}
+
+.search-box input {
+  width: 100%;
+
+  color: var(--white);
+
+  background: transparent;
+
+  border: none;
+  outline: none;
+}
+
+.search-box input::placeholder {
+  color: #7c89a7;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons button {
+  min-height: 48px;
+
+  padding: 0 18px;
+
+  cursor: pointer;
+
+  border-radius: 10px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.mark-all-btn {
+  color: #07130e;
+
+  border: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #87e3c2,
+      var(--present)
+    );
+
+  box-shadow:
+    0 8px 20px rgba(113, 213, 178, 0.14);
+}
+
+.mark-all-btn:hover {
+  transform: translateY(-3px);
+}
+
+.reset-btn {
+  color: #ffabb8;
+
+  background:
+    rgba(226, 118, 135, 0.06);
+
+  border:
+    1px solid rgba(226, 118, 135, 0.35);
+}
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+.message {
+  margin-bottom: 20px;
+
+  padding: 14px 18px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+
+  animation: messageReveal 0.4s ease;
+}
+
+@keyframes messageReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-message {
+  color: #b7f1d9;
+
+  background:
+    rgba(53, 126, 99, 0.2);
+
+  border-left:
+    4px solid var(--present);
+}
+
+.warning-message {
+  color: #f3d58f;
+
+  background:
+    rgba(140, 103, 37, 0.18);
+
+  border-left:
+    4px solid var(--pending);
+}
+
+/* ==========================================
+   STUDENT SECTION
+========================================== */
+
+.student-section {
+  padding: 25px;
+
+  border-radius: 22px;
+
+  background:
+    rgba(12, 19, 42, 0.75);
+
+  border:
+    1px solid rgba(220, 232, 255, 0.09);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+.section-heading h2 {
+  font-size: 22px;
+
+  color: var(--white);
+}
+
+.section-heading p {
+  margin-top: 5px;
+
+  font-size: 12px;
+
+  color: var(--mist);
+}
+
+.section-heading > span {
+  padding: 8px 12px;
+
+  color: var(--gold);
+
+  font-size: 11px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(240, 196, 106, 0.07);
+}
+
+/* ==========================================
+   STUDENT GRID
+========================================== */
+
+.student-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 14px;
+}
+
+/* ==========================================
+   ANIME CHARACTER CARD STYLE
+========================================== */
+
+.student-card {
+  position: relative;
+
+  min-height: 178px;
+
+  padding: 18px;
+
+  overflow: hidden;
+
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(37, 52, 96, 0.65),
+      rgba(16, 23, 52, 0.9)
+    );
+
+  border:
+    1px solid rgba(190, 207, 255, 0.1);
+
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+
+/* Cinematic diagonal light */
+
+.student-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+  height: 250%;
+
+  top: -80%;
+  left: -80px;
+
+  transform: rotate(25deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.045),
+      transparent
+    );
+
+  pointer-events: none;
+
+  transition: left 0.6s ease;
+}
+
+.student-card:hover::after {
+  left: 110%;
+}
+
+.student-card:hover {
+  transform:
+    translateY(-5px)
+    rotateX(1deg);
+
+  border-color:
+    rgba(240, 196, 106, 0.25);
+}
+
+/* State lighting */
+
+.student-present {
+  box-shadow:
+    inset 3px 0 var(--present);
+}
+
+.student-present:hover {
+  box-shadow:
+    inset 3px 0 var(--present),
+    0 16px 30px rgba(38, 154, 114, 0.12);
+}
+
+.student-absent {
+  box-shadow:
+    inset 3px 0 var(--absent);
+}
+
+.student-absent:hover {
+  box-shadow:
+    inset 3px 0 var(--absent),
+    0 16px 30px rgba(190, 62, 85, 0.1);
+}
+
+.student-pending {
+  box-shadow:
+    inset 3px 0 var(--pending);
+}
+
+/* ==========================================
+   STUDENT INFORMATION
+========================================== */
+
+.student-details {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  margin-bottom: 15px;
+}
+
+.student-avatar {
+  width: 47px;
+  height: 47px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 14px;
+
+  color: var(--moon);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(140, 165, 235, 0.25),
+      rgba(82, 105, 179, 0.1)
+    );
+
+  border:
+    1px solid rgba(193, 211, 255, 0.18);
+
+  font-size: 13px;
+  font-weight: 800;
+
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.student-data h3 {
+  color: var(--white);
+  font-size: 15px;
+}
+
+.student-data p {
+  margin-top: 4px;
+
+  color: var(--mist);
+
+  font-size: 11px;
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 11px;
+
+  margin-bottom: 14px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+}
+
+.status-present {
+  color: #a9f0d2;
+
+  background:
+    rgba(113, 213, 178, 0.1);
+
+  border:
+    1px solid rgba(113, 213, 178, 0.2);
+}
+
+.status-absent {
+  color: #ffabb7;
+
+  background:
+    rgba(226, 118, 135, 0.1);
+
+  border:
+    1px solid rgba(226, 118, 135, 0.2);
+}
+
+.status-pending {
+  color: #f3d28a;
+
+  background:
+    rgba(230, 184, 92, 0.09);
+
+  border:
+    1px solid rgba(230, 184, 92, 0.2);
+}
+
+/* ==========================================
+   ATTENDANCE BUTTONS
+========================================== */
+
+.student-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.student-buttons button {
+  flex: 1;
+
+  height: 39px;
+
+  cursor: pointer;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+
+.student-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+/* Present */
+
+.present-button {
+  color: var(--present);
+
+  background:
+    rgba(113, 213, 178, 0.05);
+
+  border:
+    1px solid rgba(113, 213, 178, 0.35);
+}
+
+.present-button:hover,
+.active-present {
+  color: #06120e !important;
+
+  background: var(--present) !important;
+
+  border-color: var(--present) !important;
+
+  animation: presentPulse 0.35s ease;
+}
+
+@keyframes presentPulse {
+  50% {
+    box-shadow:
+      0 0 25px rgba(113, 213, 178, 0.55);
+  }
+}
+
+/* Absent */
+
+.absent-button {
+  color: var(--absent);
+
+  background:
+    rgba(226, 118, 135, 0.04);
+
+  border:
+    1px solid rgba(226, 118, 135, 0.35);
+}
+
+.absent-button:hover,
+.active-absent {
+  color: #21090e !important;
+
+  background: var(--absent) !important;
+
+  border-color: var(--absent) !important;
+
+  animation: absentFlash 0.35s ease;
+}
+
+@keyframes absentFlash {
+  25% {
+    transform: translateX(-4px);
+  }
+
+  50% {
+    transform: translateX(4px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+/* ==========================================
+   SAVE SESSION
+========================================== */
+
+.save-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 24px;
+
+  margin-top: 20px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      125deg,
+      rgba(29, 42, 79, 0.9),
+      rgba(11, 17, 38, 0.92)
+    );
+
+  border:
+    1px solid rgba(220, 232, 255, 0.09);
+}
+
+.attendance-progress {
+  flex: 1;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+
+  color: var(--mist);
+
+  font-size: 12px;
+}
+
+.progress-info strong {
+  color: var(--gold);
+}
+
+.progress-bar {
+  height: 8px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+.progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7891db,
+      var(--moon),
+      var(--gold)
+    );
+
+  box-shadow:
+    0 0 15px rgba(220, 232, 255, 0.35);
+
+  transition: width 0.5s ease;
+}
+
+.save-btn {
+  min-width: 215px;
+
+  height: 52px;
+
+  cursor: pointer;
+
+  border: none;
+
+  border-radius: 11px;
+
+  color: #201806;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffe19b,
+      var(--gold)
+    );
+
+  font-size: 12px;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+
+  box-shadow:
+    0 12px 30px rgba(240, 196, 106, 0.16);
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.save-btn:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 18px 40px rgba(240, 196, 106, 0.25);
+}
+
+.save-btn:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1000px) {
+
+  .attendance-summary {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .student-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 750px) {
+
+  .attendance-page {
+    padding: 20px 12px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .class-details {
+    align-items: flex-start;
+  }
+
+  .class-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .controls-section {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .action-buttons {
+    width: 100%;
+  }
+
+  .action-buttons button {
+    flex: 1;
+  }
+
+  .section-heading {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  .save-section {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .save-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .attendance-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .header-left h1 {
+    font-size: 21px;
+  }
+
+  .student-section {
+    padding: 15px;
+  }
+
+  .student-buttons {
+    flex-direction: column;
+  }
+}
