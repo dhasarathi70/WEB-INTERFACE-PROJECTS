@@ -1,7 +1,7 @@
 
 import { useEffect, useRef } from 'react'
 import { gsap, prefersReducedMotion } from '../utils/gsapSetup'
-import profileImage from '../assets/hero.png'
+
 import './Hero.css'
 
 export default function Hero({ active }) {
@@ -209,7 +209,7 @@ function HeroPortrait() {
       </span>
 
       <img
-        src={profileImage}
+   src={`${import.meta.env.BASE_URL}profile.jpg`}
         alt="Dhasarathi A."
         className="profile-photo"
       />
